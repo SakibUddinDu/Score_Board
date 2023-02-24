@@ -4,7 +4,7 @@ const decrementEl = document.querySelector('.lws-decrement')
 const singleResult = document.querySelector('.lws-singleResult')
 const addMatchBtn = document.querySelector('.lws-addMatch')
 const reset= document.getElementById('reset')
-const container=document.querySelector('.container')
+const allMatchesContainer=document.querySelector('.all-matches')
 
 // action identifiers
 const INCREMENT = "increment";
@@ -51,7 +51,7 @@ const resetMatches = () =>{
 
 // initial state
 const initialState = [{
-    id:0,
+    id: 1,
     value: 0,
     incrementBy:1,//input theke
     decrementBy:1,
@@ -109,7 +109,7 @@ const render = () => {
          <button class="lws-delete">
            <img src="./image/delete.svg" alt="" />
          </button>
-         <h3 class="lws-matchName">Match 1</h3>
+         <h3 class="lws-matchName">Match ${match.id}</h3>
        </div>
        <div class="inc-dec">
          <form class="incrementForm">
@@ -122,12 +122,12 @@ const render = () => {
          </form>
        </div>
        <div class="numbers">
-         <h2 class="lws-singleResult">120</h2>
+         <h2 class="lws-singleResult">${match.value}</h2>
        </div>
      </div>` 
     })
     console.log(state);
-    container.innerHTML = matchesMarkup;
+    allMatchesContainer.innerHTML = matchesMarkup;
 };
 
 // update UI initially
@@ -136,8 +136,8 @@ render();
 store.subscribe(render);
 // addMatch btnHandler
 addMatchBtn.addEventListener("click", ()=>{
-    const incrementValue=document.querySelector('.lws-increment').value;
-    const decrementValue=document.querySelector('.lws-decrement').value;
+    const incrementValue=document.querySelector('.lws-increment');
+    const decrementValue=document.querySelector('.lws-decrement');
     store.dispatch(addMatch(incrementValue,decrementValue))
 })
 
